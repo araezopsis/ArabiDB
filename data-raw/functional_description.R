@@ -47,6 +47,7 @@ modified_inf <- "./temp.txt.gz"
 write_lines(temp, modified_inf)
 tair10_func_df <- read_tsv(modified_inf, quote = "\\")
 usethis::use_data(tair10_func_df)
+file_delete(modified_inf)
 
 
 # loading description -----------------------------------------------------

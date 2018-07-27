@@ -6,14 +6,14 @@ gff3_colnames <-
 
 #' extract gff3 attribute
 #' @importFrom stringr str_extract_all
-#' @importFrom stringr str_replace_all
+#' @importFrom stringr str_remove_all
 #' @importFrom magrittr %>%
 #' @param gff_attributes attributes. character vector
 extract_gff3_attr <-
   function(gff_attributes){
     str_extract_all(gff_attributes, "(^|;).+?=") %>%
       unlist %>%
-      str_replace_all("=|;", "") %>%
+      str_remove_all("=|;") %>%
       unique
   }
 
@@ -33,7 +33,7 @@ split_attr_col <-
       temp[[i]] <-
         gff_attributes %>%
         {str_extract(., str_c(i, "=.*?(;|$)"))} %>%
-        {str_replace_all(., str_c("(", i, "=)|(;|$)"), "")}
+        {str_remove_all(., str_c("(", i, "=)|(;|$)"))}
     }
     as_data_frame(temp)
   }
