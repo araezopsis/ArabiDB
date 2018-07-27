@@ -1,4 +1,20 @@
 
+#' Merge tair10_repr_df and tair10_func_df
+#' @importFrom dplyr left_join
+#' @importFrom dplyr rename
+#' @export
+merge_repr_func <-
+  function(){
+    left_join(
+      tair10_repr_df,
+      rename(tair10_func_df, transcript_id = name),
+      by = "transcript_id"
+    )
+  }
+
+
+
+
 gff3_colnames <-
   c("seqname", "source", "feature",
     "start", "end", "score", "strand",

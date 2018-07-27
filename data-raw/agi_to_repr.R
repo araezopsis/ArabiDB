@@ -3,14 +3,16 @@ library(magrittr)
 library(tidyverse)
 
 read_lines(mydata_urls$tair_repr_model_path, n_max = 3)
-tair_repr_df <-
+tair10_repr_df <-
   read_tsv(
     mydata_urls$tair_repr_model_path,
     skip = 3,
     col_names = "transcript_id"
   ) %>%
   mutate(AGI = str_extract(transcript_id, "AT[12345CM]G\\d{5}"))
-tair_repr_df %>% skimr::skim()
+tair10_repr_df %>% skimr::skim()
+usethis::use_data(tair10_repr_df)
+
 
 left_join(
   tair_repr_df,
